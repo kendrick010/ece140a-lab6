@@ -1,7 +1,7 @@
 import RPi.GPIO as GPIO
 import time
 
-ledPin = 18
+ledPin = 25
    
 def setup():
     GPIO.setmode(GPIO.BCM)     
