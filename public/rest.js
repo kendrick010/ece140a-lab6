@@ -21,9 +21,9 @@ function distance_range() {
             // to the value received from the server
             console.log(response)
             if (response['error'] == "no_error"){
-                let distance = document.getElementById('distance') 
+                let distance = document.getElementById('distance'); 
                 distance.innerHTML = "Distance:" + response['distance'].toString();
-                let timestamp = document.getElementById('timestamp') 
+                let timestamp = document.getElementById('timestamp') ;
                 timestamp.innerHTML = "TimeStamp:" + response['timestamp'].toString();
             }
             else{
@@ -102,4 +102,9 @@ function both(){
                 distance.innerHTML = response['error'].toString();
             }
         });
+}
+function get_led(){
+
+    let theURL = '/led';
+    fetch(theURL);
 }

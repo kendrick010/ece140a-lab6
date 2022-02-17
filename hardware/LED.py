@@ -7,9 +7,12 @@ def setup():
     GPIO.setmode(GPIO.BCM)     
     GPIO.setup(ledPin, GPIO.OUT)    # set ledPin to OUTPUT mode
 
+def toggle():
+    GPIO.output(ledPin, not(GPIO.input(ledPin)))
+
 def loop():
     while(True):
-        GPIO.output(ledPin, not(GPIO.input(ledPin)))
+        toggle()
         time.sleep(1)
 
 if __name__ == '__main__':     # Program entrance

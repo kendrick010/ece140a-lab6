@@ -1,12 +1,14 @@
 #import all the necessary libraries
+from inspect import _void
 from wsgiref.simple_server import make_server
-import cv2
 from pyramid.config import Configurator
 from pyramid.response import FileResponse
 
 import mysql.connector as mysql
 from dotenv import load_dotenv
 import os
+
+import test as led 
 
 load_dotenv('credentials.env')
  
@@ -40,10 +42,12 @@ def get_data(req):
   if id > 0 and id <= 15  : # if value passed is within bounds than we want height
      if (id==1):
          id = 0
-     query = "SELECT * from test_data where distance >= {} && distance < {};".format(id, id + 5)
+     query = "SELECT * from Sensor_Data where distance_cm >= {} && distance_cm < {};".format(id, id + 5)
      cursor.execute(query)
      record = cursor.fetchone()
-     print(record)     
+    #  print(record)     
+     for r in record:
+        print(r)
      #print(type(record))
      db.close()
      if record is None:
@@ -57,7 +61,7 @@ def get_data(req):
      response['id'] =record[0]
      response['distance'] =record[1]
      response['button'] =record[2]
-     response['timestamp'] =record[3]
+     response['timestamp'] =str(record[3])
 
  
 
@@ -65,7 +69,7 @@ def get_data(req):
      if(id == 0):
          id = id +10
 
-     query = "SELECT * from test_data where created >= {} && created < {};".format(id - 10, id )
+     query = "SELECT * from Sensor_Data where created >= {} && created < {};".format(id - 10, id )
      cursor.execute(query)
      record = cursor.fetchone()
      print(record)     
@@ -82,7 +86,7 @@ def get_data(req):
      response['id'] =record[0]
      response['distance'] =record[1]
      response['button'] =record[2]
-     response['timestamp'] =record[3]
+     response['timestamp'] = str(record[3])
 
   return response
 
@@ -127,7 +131,7 @@ def get_both(req):
   age = int(age)#convert back to ints 
   distance = int(distance)# so we can add upper bound 
    #execute query like normal
-  query = "SELECT * from test_data WHERE distance >= {} && distance < {} && created >= {} && created < {};".format(distance, distance + 5, age-10, age)
+  query = "SELECT * from Sensor_Data WHERE distance_cm >= {} && distance_cm < {} && created >= {} && created < {};".format(distance, distance + 5, age-10, age)
   cursor.execute(query)
   record = cursor.fetchone()
   print(record) 
@@ -143,17 +147,25 @@ def get_both(req):
   response['id'] =record[0]
   response['distance'] =record[1]
   response['button'] =record[2]
-  response['timestamp'] =record[3]
+  response['timestamp'] = str(record[3])
   return response
 
 
 
 def index_page(req):
+    
    return FileResponse("index.html")
 
+def do_led(req):
+    led.setup()
+    print("helloworld")
+    led.toggle()
+    return None
 
 
 if __name__ == '__main__':
+
+    
    with Configurator() as config:
        # Create a route called home
        config.add_route('home', '/')
@@ -165,11 +177,15 @@ if __name__ == '__main__':
        
        config.add_route('both','both/{id}')
 
+       config.add_route('led', '/led')
+
        # Binds the function get_photo to the photos route and returns JSON
        # Note: This is a REST route because we are returning a RESOURCE!
        config.add_view(get_data, route_name='data', renderer='json')
 
        config.add_view(get_both, route_name='both', renderer='json')
+
+       config.add_view(do_led,route_name='led')
  
        # Add a static view
        # This command maps the folder “./public” to the URL “/”

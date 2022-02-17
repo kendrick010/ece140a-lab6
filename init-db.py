@@ -37,7 +37,7 @@ def mysql_new():
     cursor.execute("""
         CREATE TABLE Sensor_Data (
         ID integer AUTO_INCREMENT PRIMARY KEY,
-        distance_cm DECIMAL NOT NULL,
+        distance_cm INTEGER NOT NULL,
         button_state BOOLEAN NOT NULL,    
         entered_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     );

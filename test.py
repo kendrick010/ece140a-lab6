@@ -1,10 +1,17 @@
-from ctypes import sizeof
 
+import RPi.GPIO as GPIO
+import time
 
-id = "12"
+ledPin = 25
+   
+def setup():
+    GPIO.setmode(GPIO.BCM)     
+    GPIO.setup(25, GPIO.OUT)    # set ledPin to OUTPUT mode
 
-distance = id[0]
-age = id[1]
-print(distance)
-print(age)
-print(len(id))
+def toggle():
+    GPIO.output(25, not(GPIO.input(25)))
+
+def loop():
+    while(True):
+        toggle()
+        time.sleep(1)
