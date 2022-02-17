@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+ <head>
+   <meta charset="utf-8">
+   <title> The sonic reader button  </title>
+ </head>
+ <body>
+    <h1>The sonic reader button</h1>
+    <h2>By Kendrick Nguyen and Alex Hernandez Perez </h2>
+    <div>Distance range (cm)</div>
+   <select id="distance_range">
+    <option value=1>0-5</option>
+    <option value=5>5-10</option>
+    <option value=10>10-15</option>
+    <option value=15>15-20</option>
+  </select>
+   </select>
+   <input type="button" value="Submit" onclick="distance_range()">
+
+   
+   <div>select time from __ ago (seconds) </div>
+   <select id="time_range">
+     <option value=0>0-10</option>
+     <option value=20>10-20</option>
+     <option value=30>20-30</option>
+     <option value=40>30-40</option>
+   </select>
+   <input type="button" value="Submit" onclick="time_range()">
+   <div>The bottom buttom is apply both distance and time </div>
+   <input type="button" value="Submit" onclick="both()">
+  
+   <div>
+    <div id="distance">no current ditance to show:</div>
+    <div id="timestamp">no current timestamp to show:</div>
+   </div>
+   
+   <script type="text/javascript" src="rest.js"></script>
+ </body>
+</html>
