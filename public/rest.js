@@ -106,6 +106,26 @@ function both(){
 
 function get_led(){
 
+    let status = document.getElementById("status")
+    status.innerHTML = "Collecting data now..."
+
     let theURL = '/led';
-    fetch(theURL);
+    fetch(theURL)
+        .then(response=>response.json()) // Convert response to JSON
+        // Run the anonymous function on the received JSON response
+        .then(function(response) {
+            // Set the value of the img_src attribute of the img tag
+            // to the value received from the server
+            console.log(response)
+            if (response){
+                // do stuff
+                let message = document.getElementById('timestamp')
+                message.innerHTML = response['msg'].toString();
+                status.innerHTML = "Data collection finished!"
+            }
+            else{
+                console.log("error")
+                message.innerHTML = 'error'
+            }
+    });
 }

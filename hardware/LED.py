@@ -1,13 +1,13 @@
 import RPi.GPIO as GPIO
 import time
-
-ledPin = 25
    
 def setup():
+    ledPin = 25
     GPIO.setmode(GPIO.BCM)     
     GPIO.setup(ledPin, GPIO.OUT)    # set ledPin to OUTPUT mode
 
 def toggle():
+    ledPin = 25
     GPIO.output(ledPin, not(GPIO.input(ledPin)))
 
 def loop():

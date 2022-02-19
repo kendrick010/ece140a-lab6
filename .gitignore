@@ -1,3 +1,4 @@
 .DS_Store
 credentials.env
+__pycache__
 __pycache__/

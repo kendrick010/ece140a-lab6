@@ -9,7 +9,8 @@ import mysql.connector as mysql
 from dotenv import load_dotenv
 import os
 
-import test as led 
+import hardware.LED as led 
+import init_db as sense
 
 
 load_dotenv('credentials.env')
@@ -183,9 +184,12 @@ def index_page(req):
 
 def do_led(req):
     led.setup()
-    print("helloworld")
     led.toggle()
-    return None
+    sense.setup()
+    sense.loop()
+    led.toggle()
+
+    return {'msg': 'New data has been collected'}
 
 
 if __name__ == '__main__':
@@ -215,7 +219,7 @@ if __name__ == '__main__':
 
        config.add_view(get_both, route_name='both', renderer='json')
 
-       config.add_view(do_led,route_name='led')
+       config.add_view(do_led,route_name='led', renderer='json')
 
        
        config.add_view(get_all,route_name='getall')
