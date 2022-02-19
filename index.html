@@ -14,23 +14,49 @@
     <option value=10>10-15</option>
     <option value=15>15-20</option>
   </select>
-   </select>
    <input type="button" value="Submit" onclick="distance_range()">
 
    
    <div>select time from __ ago (seconds) </div>
    <select id="time_range">
-     <option value=0>0-10</option>
-     <option value=20>10-20</option>
-     <option value=30>20-30</option>
-     <option value=40>30-40</option>
+     <option value=0>0-30</option>
+     <option value=30>30-60</option>
    </select>
    <input type="button" value="Submit" onclick="time_range()">
+
    <div>The bottom buttom is apply both distance and time </div>
    <input type="button" value="Submit" onclick="both()">
+
+   <div>This button is to fetch new data to display in the table 
+     <a href="http://localhost:6543/getall">
+   <input type="button" value="Fetch">
+  </a>
+  </div>
    
 
    <div>
+     <table id="table" style="border: 2px black">
+      <thead>
+        <tr>
+          <th>id</th>
+          <th>distance(cm)</th>
+          <th>button bool</th>
+          <th>timestamp</th>
+       </tr>
+      </thead>
+      <tbody>
+        {% for response in responses%}
+       <tr>
+          <td>{{response[0]}}</td>
+          <td>{{response[1]}}</td>
+          <td>{{response[2]}}</td>
+          <td>{{response[3]}}</td>
+       </tr>
+        {% endfor %}
+      </tbody>
+     </table>
+   </div>
+   <div>Display first instance of criteria that can be applied above
     <div id="distance"> no current distance to show :</div>
     <div id="timestamp"> no current timestamp to show :</div>
   </div>

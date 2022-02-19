@@ -103,6 +103,7 @@ function both(){
             }
         });
 }
+
 function get_led(){
 
     let theURL = '/led';
