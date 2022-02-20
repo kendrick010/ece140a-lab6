@@ -45,7 +45,7 @@ The project we created is the Sonic Reader Button. It is essentially a webserver
 
     On the both criteria, clicking the `Submit` will output the first instance satisfying both the selected distance range and button state in your produced data.
 
-> Note: Attempting to click any of the buttons on the webpage while in the middle of recording data will affect anything. The program runs sequentially.
+> Note: Attempting to click any of the buttons on the webpage while in the middle of recording data will not affect anything. The program runs sequentially.
 
 ## c. Challege 1 Midterm Code:
 > [README.md](/doc/README.md) code explanations
