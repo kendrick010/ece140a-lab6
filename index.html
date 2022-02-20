@@ -1,75 +1,106 @@
 <!DOCTYPE html>
 <html>
- <head>
-   <meta charset="utf-8">
-   <title> The sonic reader button  </title>
- </head>
- <body>
-    <h1>The sonic reader button</h1>
-    <h2>By Kendrick Nguyen and Alex Hernandez Perez </h2>
-    <div>Distance range (cm)</div>
-   <select id="distance_range">
-    <option value=1>0-5</option>
-    <option value=5>5-10</option>
-    <option value=10>10-15</option>
-    <option value=15>15-20</option>
-  </select>
-   <input type="button" value="Submit" onclick="distance_range()">
+  <!-- Head element, refer to css and js files -->
+  <head>
+    <meta charset="utf-8">
+    <title> The Sonic Reader Button </title>
 
-   
-   <div>select time from __ ago (seconds) </div>
-   <select id="time_range">
-     <option value=0>0-30</option>
-     <option value=30>30-60</option>
-   </select>
-   <input type="button" value="Submit" onclick="time_range()">
+    <link rel="stylesheet" type="text/css" href="simple.css">
+    <script type="text/javascript" src="rest.js"></script>
+  </head>
 
-   <div>The bottom buttom is apply both distance and time </div>
-   <input type="button" value="Submit" onclick="both()">
+  <!-- Body element -->
+  <body>
+    <!-- Heading -->
+    <h1> The Sonic Reader Button </h1>
+    <h2> By Kendrick Nguyen and Alex Hernandez Perez </h2>
 
-   <div>This button is to fetch new data to display in the table 
-     <a href="http://localhost:6543/getall">
-   <input type="button" value="Fetch">
-  </a>
-  </div>
-   
+    <hr>
 
-   <div>
-     <table id="table" style="border: 2px black">
-      <thead>
-        <tr>
-          <th>id</th>
-          <th>distance(cm)</th>
-          <th>button bool</th>
-          <th>timestamp</th>
-       </tr>
-      </thead>
-      <tbody>
-        {% for response in responses%}
-       <tr>
-          <td>{{response[0]}}</td>
-          <td>{{response[1]}}</td>
-          <td>{{response[2]}}</td>
-          <td>{{response[3]}}</td>
-       </tr>
-        {% endfor %}
-      </tbody>
-     </table>
-   </div>
-   <div>Display first instance of criteria that can be applied above
-    <div id="distance"> no current distance to show :</div>
-    <div id="timestamp"> no current timestamp to show :</div>
-  </div>
+    <div class="float-container">
+      <!-- Record button, press to start live record data from sensors-->
+      <div class="left">
+        <div>  
+          <p1> Press to start recording data </p1>
+          <input type="button" value="Record" onclick="start_recording()">
+          <p1 id="status"></p1>
+        </div>
+  
+        <br><br>
+        
+        <!-- Renders Jinja template with data from database -->
+        <div class="display"> Press to display data
+          <a href="http://localhost:6543/getall">
+            <input type="button" value="Display">
+          </a>
+        </div>
+  
+        <!-- Sensor_Data table -->
+        <div>
+          <table id="table" style="border: 2px black">
+            <thead>
+              <tr>
+                <th> ID </th>
+                <th> Distance (cm) </th>
+                <th> Button Bool </th>
+                <th> Timestamp </th>
+            </tr>
+            </thead>
+            <tbody>
+              {% for response in responses%}
+            <tr>
+                <td>{{response[0]}}</td>
+                <td>{{response[1]}}</td>
+                <td>{{response[2]}}</td>
+                <td>{{response[3]}}</td>
+            </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
 
-  <div>  
-    <p1> Press LED to get data </p1>
-    <input type="button" value="LED" onclick="get_led()">
-    <p1 id="status"> </p1>
-  </div>
+      <div class="right">
 
-   
+        <!-- Drop down to select distance query -->
+        <div> See distance range (cm) </div>
+        <select id="distance_range">
+          <option value="0-4"> 0-5 </option>
+          <option value="5-9"> 5-10 </option>
+          <option value="10-14"> 10-15 </option>
+          <option value="15-20"> 15-20 </option>
+        </select>
+        <input type="button" value="Submit" onclick="distance_range()">
+    
+        <br><br>
+    
+        <!-- Drop down to select button query -->
+        <div> See button (bool) </div>
+        <select id="button_state">
+          <option value="0"> 0-False </option>
+          <option value="1"> 1-True </option>
+        </select>
+        <input type="button" value="Submit" onclick="buttonState()">
+    
+        <br><br>
+    
+        <div> See from both distance and time </div>
+        <input type="button" value="Submit" onclick="both()">
+    
+        <br><br>
+        
+        <!-- Show results from query -->
+        <div> Displaying first instance of submitted criteria
+          <br><br>
+          <div id="table_id"> No ID to show </div>
+          <div id="distance"> No distance to show </div>
+          <div id="button"> No button state to show </div>
+          <div id="timestamp"> No timestamp to show </div>
+        </div>
+  
+      </div>
 
-   
-   <script type="text/javascript" src="rest.js"></script>
- </body>
+    </div>
+ 
+  </body>
 </html>

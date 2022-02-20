@@ -1,24 +1,28 @@
 import RPi.GPIO as GPIO
 import time
-   
-def setup():
-    ledPin = 25
-    GPIO.setmode(GPIO.BCM)     
-    GPIO.setup(ledPin, GPIO.OUT)    # set ledPin to OUTPUT mode
 
+ledPin = 25
+
+# Set ledPin to OUTPUT mode
+def setup():
+    GPIO.setmode(GPIO.BCM)     
+    GPIO.setup(ledPin, GPIO.OUT)
+
+# Turns off led when on, turns on led when off
 def toggle():
-    ledPin = 25
     GPIO.output(ledPin, not(GPIO.input(ledPin)))
 
+# Call this to loop toggle(), essentially a blink example
 def loop():
     while(True):
         toggle()
         time.sleep(1)
 
-if __name__ == '__main__':     # Program entrance
+# Program entrance
+if __name__ == '__main__':     
     print ('Program is starting...')
     setup()
     try:
         loop()
     except KeyboardInterrupt:  # Press CTRL-C to end the program
-        GPIO.cleanup()         # release GPIO resources
+        GPIO.cleanup()         # Release GPIO resources
