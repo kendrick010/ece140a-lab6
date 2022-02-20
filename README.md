@@ -1,5 +1,7 @@
 # Alex Hernandez Perez (A16543960) <br /> Kendrick Nguyen (A16045878)
 
+> We worked on this lab on another private repository, [GitHub](https://github.com/kendrick010/ece140a-lab6), which is why we have one commit on this current repository.
+
 ## Lab 6 Objective:
 The objective of this lab is incorporate web development skills we have learned from the previous labs with hardware, specificaly with the Raspberry Pi.
 
@@ -10,7 +12,7 @@ In this tutorial, we learned how to setup a raspberry pi, enabling SSSH and mysq
 In this tutorial, we learned how to use the i/o pins on the raspberry pi with the ultrasonic sensor and piezo buzzer. From the tutorial, we obtained printed distance data obtained from the ultrasonic sensor.
 
 ## c. Challege 1 Midterm: 
-> [YouTube](https://pages.github.com/) submission link
+> [YouTube](https://youtu.be/4FGcyNgpSbQ) submission link
 
 The project we created is the Sonic Reader Button. It is essentially a webserver application that collects periodic sensor readings from an ultrasonic sensor and a button. The collected data is stored into a MySQL database for it be conveniently accessed by the webserver to fetch, query, and display data on the webage.
 
@@ -57,4 +59,5 @@ The project we created is the Sonic Reader Button. It is essentially a webserver
         - simple.css
     - app.py
     - credentials.env
-    - init-db.py
+    - index.html
+    - init_db.py
